@@ -26,11 +26,11 @@ function three() {
 
   THREE.ImageUtils.crossOrigin = '';
   // IMPORTANT: This next line defines the texture of your coin. I didn't include the Minecraft texture (for copyright reasons) You should replace the url inside '.load(...)' with the path to your own image.
-  const textureCirc = new THREE.TextureLoader().load("circumference1.jpg");
+  const textureCirc = new THREE.TextureLoader().load("img/circumference.jpg");
   textureCirc.wrapS = THREE.RepeatWrapping;//repeat texture horizontally
   textureCirc.repeat.set(20, 0);//repeat 20x
-  const textureHeads = new THREE.TextureLoader().load("heads.jpg");
-  const textureTails = new THREE.TextureLoader().load("tails.jpg");
+  const textureHeads = new THREE.TextureLoader().load("img/heads.jpg");
+  const textureTails = new THREE.TextureLoader().load("img/tails.jpg");
   const metalness = 0.7;
   const roughness = 0.3;
 
@@ -71,7 +71,7 @@ function three() {
 }
 
 function animate() {
-  coin.rotation.x += 0.1;
+  coin.rotation.x += 0.07;
   xRotAngle = coin.rotation.x;
   id = requestAnimationFrame(animate);
   // console.log(id);

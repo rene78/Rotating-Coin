@@ -94,7 +94,7 @@ function initializeScene() {
   renderer.setSize(div.offsetWidth, div.offsetHeight);
   div.appendChild(renderer.domElement);
   // document.body.appendChild(renderer.domElement);
-  scene.background = new THREE.Color(0x000000);
+  scene.background = new THREE.Color(0xffffff);
 }
 
 const side = "tails";

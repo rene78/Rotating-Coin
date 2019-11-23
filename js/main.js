@@ -1,5 +1,4 @@
-let scene, camera, renderer, id;
-let coin;
+let scene, camera, renderer, coin, id;
 
 document.addEventListener("DOMContentLoaded", three);
 
@@ -65,13 +64,10 @@ function three() {
   coin.rotation.y = Math.PI / 2;
 
   animate();
-
-  setTimeout(function () { console.log(coin.rotation.x); }, 2000);
-  // setTimeout(function () { cancelAnimationFrame( id ); }, 1000);
 }
 
 function animate() {
-  coin.rotation.x += 0.07;
+  coin.rotation.x += 0.05;
   xRotAngle = coin.rotation.x;
   id = requestAnimationFrame(animate);
   // console.log(id);
@@ -97,27 +93,27 @@ function initializeScene() {
   scene.background = new THREE.Color(0xffffff);
 }
 
-const side = "tails";
-function stopAnimation() {
+let angleToVertical;
+function stopAnimation(side) {
+  //on first run of function "side" is a string ("heads" or "tails"). On subsequent runs it is a timestamp (number)
+  if (typeof side === "string") {
+    // console.log(side);
+    angleToVertical = (side === "tails") ? (3 * Math.PI / 2) : (Math.PI / 2);//tails=1.5pi, heads=pi/2
+    // console.log(angleToVertical);
+  }
+  
   let rotVal = coin.rotation.x;
-  const headsAngle = (2.5 * Math.PI);//7.85 -->falsch!
-  const tailsAngle = (3.5 * Math.PI);//11.00
 
-  // const stopAngle = (side === "tails") ? tailsAngle : headsAngle;
-  // console.log(stopAngle);
+  // console.log(rotVal);
+  let deltaAngle = rotVal % (Math.PI * 2) - angleToVertical;
+  // console.log(deltaAngle);
 
-  console.log(rotVal);
-  // console.log("Heads Angle: " + headsAngle);
-  // console.log("(rotVal % headsAngle): " + rotVal % headsAngle);
-  let leftover = rotVal % (Math.PI * 2) - (Math.PI / 2);
-  console.log(leftover);
-
-  if (leftover < 0.06 && leftover > -0.06) {
+  if (deltaAngle < 0.06 && deltaAngle > -0.06) {
     cancelAnimationFrame(id);//cancel coin animation
     cancelAnimationFrame(stopAnimation);//cancel excution of this function
     return;
   }
-  requestAnimationFrame(stopAnimation);//rerun this function until if-statment below is true
+  requestAnimationFrame(stopAnimation);//rerun this function until if-statment above is true
 }
 
 function startAnimation() {
@@ -129,10 +125,3 @@ function startAnimation() {
   mainBody.replaceChild(newdiv, oldDiv);
   three();
 }
-
-//Weiteres Vorgehen
-// 1. Münze nur in Teilbereich der Website darstellen
-// 2. Knopf erzeugen. Nach Druck soll Animation bei Kopf bzw. Zahl stoppen
-//in radian
-//heads=1.57 und vielfache von 2pi --> pi/2 (1.57), 2.5pi (7.85), 4.5pi (14.14)
-//tails=3.14+1.57

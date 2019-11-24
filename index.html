@@ -6,22 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Coin animation with Three.js</title>
-  <style>
-    .three-coin {
-      width: 400px;
-      height: 400px;
-      background-color: aqua;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 
 <body>
   <main>
-    <h1>Coin in a div</h1>
+    <h1>The Rotating Swiss Franc</h1>
     <div class="three-coin"></div>
-    <button onclick="stopAnimation('heads')">Stop at heads</button>
-    <button onclick="stopAnimation('tails')">Stop at tails</button>
-    <button onclick="startAnimation()">Start</button>
+    <button onclick="swissFranc.stopAnimation('heads')">Stop at heads</button>
+    <button onclick="swissFranc.stopAnimation('tails')">Stop at tails</button>
+    <button onclick="swissFranc.animateCoin()">Start</button>
   </main>
 
   <script src="js/three.min.js"></script>

@@ -1,0 +1,22 @@
+main {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  text-align: center;
+}
+
+h1 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+.three-coin {
+  height: 400px;
+}
+
+@media (max-width: 600px){
+  main {
+    width: 90%;
+  }
+}

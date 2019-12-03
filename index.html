@@ -12,10 +12,10 @@
 <body>
   <main>
     <h1>The Rotating Swiss Franc</h1>
-    <div class="three-coin"></div>
+    <div class="three-coin"><canvas></canvas></div>
     <button onclick="swissFranc.stopAnimation('heads')">Stop at heads</button>
     <button onclick="swissFranc.stopAnimation('tails')">Stop at tails</button>
-    <button onclick="swissFranc.animateCoin()">Start</button>
+    <button class="start-button" onclick="swissFranc.animateCoin()">Start again</button>
   </main>
 
   <script src="js/three.min.js"></script>

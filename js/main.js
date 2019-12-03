@@ -65,30 +65,38 @@ function three() {
 
   animateCoin();
 
-  function animateCoin() {
-    coin.rotation.x += 0.05;
-    xRotAngle = coin.rotation.x;
-    id = requestAnimationFrame(animateCoin);
-    // console.log(id);
-    // console.log(xRotAngle);
+  //Update canvas on container size change. Thanks to gman (https://stackoverflow.com/a/45046955/5263954)!
+  function resizeCanvasToDisplaySize() {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    if (canvas.width !== width || canvas.height !== height) {
+      console.log("Container size of coin animation has changed. Canvas size updated!");
+      // you must pass false here or three.js sadly fights the browser
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
 
-    //Change camera position during animation
-    // let dist = 7;
-    // dist = dist + (dist * id / 1000);
-    // console.log(dist);
-    // camera.position.set(0, 0, dist);
+      // set render target sizes here
+    }
+  }
+
+  function animateCoin(time) {
+    time *= 0.001;  // seconds, not used
+    // console.log(time);
+
+    resizeCanvasToDisplaySize();
+
+    coin.rotation.x += 0.05;
 
     renderer.render(scene, camera);
+    id = requestAnimationFrame(animateCoin);
   }
 
   function initializeScene() {
-    let div = document.querySelector(".three-coin");
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, div.offsetWidth / div.offsetHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(div.offsetWidth, div.offsetHeight);
-    div.appendChild(renderer.domElement);
-    // document.body.appendChild(renderer.domElement);
+    camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ canvas: document.querySelector(".three-coin canvas") });
     scene.background = new THREE.Color(0xffffff);
   }
 
@@ -109,6 +117,8 @@ function three() {
     if (deltaAngle < 0.06 && deltaAngle > -0.06) {
       cancelAnimationFrame(id);//cancel coin animation
       cancelAnimationFrame(stopAnimation);//cancel excution of this function
+      //show start button
+      document.querySelector(".start-button").className="";
       return;
     }
     requestAnimationFrame(stopAnimation);//rerun this function until if-statment above is true
@@ -120,16 +130,3 @@ function three() {
   }
   return coinObj;
 }
-
-/*
-function startAnimation() {
-  //Replace current three.js canvas ("three-coin") with an empty one. Else a new one is created
-  // let newdiv = document.createElement("div");
-  // newdiv.setAttribute("class", "three-coin");
-  // let oldDiv = document.querySelector(".three-coin");
-  // let mainBody = document.querySelector("main");
-  // mainBody.replaceChild(newdiv, oldDiv);
-  // three();
-  animateCoin();
-}
-*/

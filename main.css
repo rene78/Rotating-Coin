@@ -1,9 +1,23 @@
 main {
   margin: auto;
-  width: 50%;
+  /* width: 50%; */
   border: 3px solid #4caf50;
   padding: 10px;
   text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.three-coin {
+  width: 70%;
+  margin: auto;
+}
+
+.button-column {
+  margin: auto;
 }
 
 h1 {
@@ -14,9 +28,7 @@ h1 {
 button {
   display: block;
   margin: 1em auto;
-
-  bottom: 30px;
-  width: 200px;
+  /* width: 200px; */
   background-color: #4caf50;
   border: none;
   color: white;
@@ -39,11 +51,11 @@ button {
 
 canvas { width: 100%; height: 100%; }
 
-@media (max-width: 600px){
-  main {
+@media (max-width: 600px) {
+  /* main {
     width: 90%;
-  }
+  } */
   .three-coin {
-    height: 20em; /*Without this coin is too small on mobile devices*/
+    height: 15em; /*Without "height" coin is too small on mobile devices*/
   }
 }

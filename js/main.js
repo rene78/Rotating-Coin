@@ -95,7 +95,7 @@ function three() {
 
   function initializeScene() {
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(55, 1, 1, 10);
     renderer = new THREE.WebGLRenderer({ canvas: document.querySelector(".three-coin canvas") });
     scene.background = new THREE.Color(0xffffff);
   }
@@ -118,7 +118,8 @@ function three() {
       cancelAnimationFrame(id);//cancel coin animation
       cancelAnimationFrame(stopAnimation);//cancel excution of this function
       //show start button
-      document.querySelector(".start-button").className="";
+      let startButton = document.querySelector(".start-button");
+      if (startButton) startButton.className = ""; //remove display: none, if not already done
       return;
     }
     requestAnimationFrame(stopAnimation);//rerun this function until if-statment above is true
